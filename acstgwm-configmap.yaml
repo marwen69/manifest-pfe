@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: acstgwm-configmap
+  namespace: acstgwm
+data:
+  spring.data.mongodb.database: "ACSTGWM"
+  server.port: "8089"
+  server.servlet.context-path: "/ACST-GWM"
+  spring.security.oauth2.client.registration.google.scope: "profile,email,https://www.googleapis.com/auth/admin.directory.device.mobile.readonly,https://www.googleapis.com/auth/admin.directory.device.mobile,https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly,https://www.googleapis.com/auth/admin.directory.device.chromeos,https://www.googleapis.com/auth/classroom.rosters.readonly,https://www.googleapis.com/auth/admin.directory.group,https://www.googleapis.com/auth/admin.directory.group.readonly,https://www.googleapis.com/auth/user.emails.read,https://www.googleapis.com/auth/contacts.readonly,https://www.googleapis.com/auth/userinfo.email,https://www.googleapis.com/auth/admin.directory.user.readonly,https://www.googleapis.com/auth/admin.reports.audit.readonly,https://www.googleapis.com/auth/admin.reports.usage.readonly,https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/drive.admin,https://www.googleapis.com/auth/drive.metadata.readonly,https://www.googleapis.com/auth/drive.file,https://www.googleapis.com/auth/drive.activity.readonly,https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly,https://www.googleapis.com/auth/classroom.courses.readonly,https://www.googleapis.com/auth/classroom.rosters.readonly"
+  spring.security.oauth2.client.registration.google.redirect-uri: "https://gam.support.com:8089/ACST-GWM/login/oauth2/code/google"
+  frontend.url: "https://gam.support.com:3000"
+  spring.mail.host: "smtp.gmail.com"
+  spring.mail.port: "587"
+  spring.mail.properties.mail.smtp.auth: "true"
+  spring.mail.properties.mail.smtp.starttls.enable: "true"
+  deepseek.api.url: "https://api.deepseek.com/v1/chat/completions"
+  management.endpoint.metrics.enabled: "true"
+  management.endpoints.web.exposure.include: "prometheus"
+  management.endpoint.prometheus.enabled: "true"
+  spring.cache.type: "redis"
+  spring.data.redis.port: "6379"
