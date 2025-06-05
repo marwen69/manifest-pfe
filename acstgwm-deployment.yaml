@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acstgwm-deployment
+  namespace: acstgwm
+  labels:
+    app: acstgwm
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: acstgwm
+  template:
+    metadata:
+      labels:
+        app: acstgwm
+    spec:
+      containers:
+      - name: acstgwm
+        image: marwenhm/backendimage:latest
+        ports:
+        - containerPort: 8089
+        env:
+        - name: MONGODB_URI
+          value: "mongodb://mongodb:27017/ACSTGWM"
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: acstgwm-configmap
+              key: spring.data.redis.port
+        - name: FRONTEND_URL
+          valueFrom:
+            configMapKeyRef:
+              name: acstgwm-configmap
+              key: frontend.url
+        - name: GOOGLE_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: acstgwm-secret
+              key: GOOGLE_CLIENT_ID
+        - name: GOOGLE_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: acstgwm-secret
+              key: GOOGLE_CLIENT_SECRET
+        - name: GMAIL_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: acstgwm-secret
+              key: GMAIL_USERNAME
+        - name: GMAIL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: acstgwm-secret
+              key: GMAIL_PASSWORD
+        - name: DEEPSEEK_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: acstgwm-secret
+              key: DEEPSEEK_API_KEY
+        - name: GOOGLE_SERVICE_ACCOUNT_KEY_PATH
+          valueFrom:
+            secretKeyRef:
+              name: acstgwm-secret
+              key: GOOGLE_SERVICE_ACCOUNT_KEY_PATH
+        - name: GOOGLE_SERVICE_ACCOUNT_USER
+          valueFrom:
+            secretKeyRef:
+              name: acstgwm-secret
+              key: GOOGLE_SERVICE_ACCOUNT_USER
+        volumeMounts:
+        - name: service-account-volume
+          mountPath: "/app/src/main/resources/service-account.json"
+          subPath: service-account.json
+      volumes:
+      - name: service-account-volume
+        secret:
+          secretName: acstgwm-secret
+          items:
+          - key: GOOGLE_SERVICE_ACCOUNT_KEY_PATH
+            path: service-account.json
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
