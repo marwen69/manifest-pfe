@@ -76,6 +76,8 @@ spec:
                 secretKeyRef:
                   name: app-secrets
                   key: GOOGLE_SERVICE_ACCOUNT_USER
+            - name: GOOGLE_SERVICE_ACCOUNT_KEY_PATH
+              value: /config/service-account.json
           volumeMounts:
             - name: service-account
               mountPath: /config
@@ -85,25 +87,6 @@ spec:
             - -Dgoogle.service.account.key.location=file:/config/service-account.json
             - -jar
             - /app/ACST.jar
-          resources:
-            requests:
-              memory: "256Mi"
-              cpu: "250m"
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 8089
-            initialDelaySeconds: 5
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 8089
-            initialDelaySeconds: 15
-            periodSeconds: 20
       volumes:
         - name: service-account
           secret:
