@@ -7,4 +7,4 @@ resources:
   - mongo-service.yaml
   - redis-deployment.yaml
   - redis-service.yaml
-  - argocd-application.yaml
+
