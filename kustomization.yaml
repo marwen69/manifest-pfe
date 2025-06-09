@@ -1,0 +1,10 @@
+resources:
+  - backend-deployment.yaml
+  - backend-service.yaml
+  - frontend-deployment.yaml
+  - frontend-service.yaml
+  - mongo-deployment.yaml
+  - mongo-service.yaml
+  - redis-deployment.yaml
+  - redis-service.yaml
+  - argocd-application.yaml
