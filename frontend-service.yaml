@@ -6,6 +6,6 @@ spec:
   selector:
     app: frontend
   ports:
-    - port: 3000
-      targetPort: 3000
+    - port: 31678
+      targetPort: 31678
   type: NodePort
