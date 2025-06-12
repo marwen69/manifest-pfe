@@ -2,10 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend
+  namespace: argocd  # Add namespace
 spec:
   selector:
     app: frontend
   ports:
     - port: 3000
       targetPort: 3000
+      nodePort: 32229  # Pin to 32229
   type: NodePort
