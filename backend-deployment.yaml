@@ -86,7 +86,7 @@ spec:
             - java
             - -Dgoogle.service.account.key.location=file:/config/service-account.json
             - -jar
-            - /app/ACST.jar
+            - /ACST-0.0.1.jar
       volumes:
         - name: service-account
           secret:
