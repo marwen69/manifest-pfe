@@ -18,4 +18,4 @@ spec:
         - name: frontend
           image: marwenhm/pfe-frontend:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 31678
