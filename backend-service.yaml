@@ -9,4 +9,5 @@ spec:
   ports:
     - port: 8089
       targetPort: 8089
+      nodePort: 32583  # Pin to 32583
   type: NodePort
